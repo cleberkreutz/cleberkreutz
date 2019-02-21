@@ -11,7 +11,7 @@ public class RevisaoJava {
         int valor;
         //atribuir o valor retornado do método SOMAR
         //somarNumeros é estático, logo, não precisa inicializar a classe Funcoes
-        valor = Funcoes.somarNumeros(2, 8);
+        valor = Funcoes.somarNumeros(2, 4);
         System.out.println("RESULTADO DA SOMA = " + valor);
         
         //Criando uma instância de uma classe
