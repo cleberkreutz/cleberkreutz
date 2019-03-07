@@ -28,8 +28,7 @@ public class RevisaoJava {
             x++;
         }
         
-        int[] numeros = {11,3,12,4,50,50};
-        
+        int[] numeros = {1,2,3};
         System.out.println("ENCHANCED FOR");
         for(int var : numeros){
             System.out.println(var);
@@ -40,8 +39,24 @@ public class RevisaoJava {
             System.out.println(numeros[var]);
         }
         
-        resultado = Funcoes.somarNumeros(numeros);
-        System.out.println("RESULTADO DA SOMA = " + resultado);
+        int[] numeros_array = {2,2,1};
+        int res_soma = Funcoes.somarNumeros(numeros_array);
+        System.out.println("RESULTADO DA SOMA = " + res_soma);
+        
+        int res_mul = Funcoes.multiplicaNumeros(numeros_array);
+        System.out.println("RESULTADO DA MULTIPLICAÇÃO = " + res_mul);
+        
+        double res_div = Funcoes.divideNumeros(numeros_array);
+        System.out.println("RESULTADO DA DIVISAO = " + res_div);
+        
+        int res_sub = Funcoes.subtraiNumeros(numeros_array);
+        System.out.println("RESULTADO DA SUBTRACAO = " + res_sub);
+        
+        System.out.println();//linha em branco
+        System.out.println();//linha em branco
+        System.out.println();//linha em branco
+        String sorteio = Funcoes.sortearNumeros(6, 60);
+        System.out.println("SORTEIO = " + sorteio);
         
     }
     
