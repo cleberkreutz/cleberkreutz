@@ -1,5 +1,9 @@
 package projeto;
 
+/*
+autor: Jonas Dhein
+*/
+
 public class Funcoes {
     
     //método que soma 2 números
