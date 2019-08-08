@@ -11,4 +11,6 @@ package projeto;
  */
 public class Pessoa {
     
+    private int id;
+    
 }
