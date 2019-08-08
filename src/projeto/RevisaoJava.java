@@ -1,5 +1,9 @@
 package projeto;
 
+/*
+   autor: Jonas Dhein
+*/
+
 public class RevisaoJava {
 
     //método de inicialização da classe
