@@ -6,7 +6,6 @@ autor: Jonas Dhein
 
 public class Funcoes {
     
-    //método que soma 2 números
     /*
         modificador de acesso (public, private)
         public = torna o método disponível para todo o projeto
