@@ -52,11 +52,24 @@ public class Pessoa {
         this.valorConta = valorConta;
     }
     
+    public boolean credito(double valorTransferencia){
+        if(valorTransferencia <= this.valorConta){
+            this.valorConta -= valorTransferencia;
+            System.out.println("Transferência realizada.");
+            return true;
+        }else{
+            System.out.println("Transferência não realizada.");
+            return false;
+        }
+    }
     
+    public void debito(double valor){
+        this.valorConta += valor;
+    }
     
     @Override
     public String toString(){
-        return "Nome: " + this.nome + "\nSaldo: " + this.valorConta;
+        return "Nome: " + nome + "\nSaldo: " + valorConta;
     }
     
 }
