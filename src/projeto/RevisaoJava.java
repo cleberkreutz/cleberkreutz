@@ -24,7 +24,7 @@ public class RevisaoJava {
         pessoa2.setCodigo(2);
         pessoa2.setNome("João");
         pessoa2.setValorConta(1000);
-        pessoa1.setChequeEspecial(100);
+        pessoa2.setChequeEspecial(100);
         
         System.out.println("Saldo Inicial:");
         System.out.println(pessoa1);

@@ -62,13 +62,13 @@ public class Pessoa {
     }
     
     public boolean credito(double valorTransferencia){
-        //testa junto com o chequeEspecial
+        //testar junto com o chequeEspecial
         if(valorTransferencia <= (this.valorConta + this.chequeEspecial)){
             this.valorConta -= valorTransferencia;
-            System.out.println("Transferência realizada.");
+            System.out.println("Transferência realizada.\n");
             return true;
         }else{
-            System.out.println("Transferência não realizada.");
+            System.out.println("Transferência não realizada.\n");
             return false;
         }
     }
