@@ -1,6 +1,7 @@
 package projeto;
 
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 /*
 autor: Jonas Dhein
@@ -8,6 +9,15 @@ autor: Jonas Dhein
 
 public class Funcoes {
     
+    
+    public static void mostrarMensagem(String mensagem){
+        try{
+            JOptionPane.showMessageDialog(null, mensagem);
+            
+        }catch(Exception ex){
+            
+        }
+    }
     /*
         modificador de acesso (public, private)
         public = torna o método disponível para todo o projeto
@@ -73,6 +83,21 @@ public class Funcoes {
         resultado = resultado.substring(0, resultado.length() - 1);
         return resultado;
     }
+    
+    public static boolean validarNumero(String numero){
+        try{
+            if(numero.matches("[0-9].*")){
+                return true;
+            }else{
+                return false;
+            }
+            
+            
+        }catch(Exception ex){
+            return false;
+        }
+    }
+        
    
     
 }

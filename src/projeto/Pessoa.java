@@ -10,8 +10,8 @@ public class Pessoa {
     private String nome;
     private String endereco;
     private String telefone;
-    private double valorConta;     //500
-    private double chequeEspecial; //1000
+    private double valorConta;     
+    private double chequeEspecial;
 
     public int getCodigo() {
         return codigo;

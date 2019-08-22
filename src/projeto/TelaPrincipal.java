@@ -63,6 +63,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         lblChequeEspecial2 = new javax.swing.JLabel();
         txtTransferencia2 = new javax.swing.JTextField();
         txtTransferencia1 = new javax.swing.JTextField();
+        btnTransfere3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,6 +93,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         lblChequeEspecial2.setText("jLabel1");
 
+        btnTransfere3.setText("MSG");
+        btnTransfere3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTransfere3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,14 +110,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblChequeEspecial1)
-                            .addComponent(lblValor1)
-                            .addComponent(lblNome1)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblValor1)
+                                    .addComponent(lblNome1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                                .addComponent(btnTransfere3))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(txtTransferencia1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnTransfere1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtTransferencia2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,12 +138,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblNome1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblValor1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblChequeEspecial1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblNome1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblValor1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblChequeEspecial1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnTransfere3)
+                                .addGap(40, 40, 40)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnTransfere1)
                             .addComponent(txtTransferencia1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -145,7 +162,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnTransfere2)
                             .addComponent(txtTransferencia2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         pack();
@@ -153,13 +170,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnTransfere1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransfere1ActionPerformed
         try{
-            double transf = Double.parseDouble(txtTransferencia1.getText());
-            if(pessoa1.credito(transf) == true){
-                pessoa2.debito(transf);
+            if(Funcoes.validarNumero(txtTransferencia1.getText())){
+                double transf = Double.parseDouble(txtTransferencia1.getText());
+                if(pessoa1.credito(transf) == true){
+                    pessoa2.debito(transf);
+                    Funcoes.mostrarMensagem("Sucesso!");
+                }
+                lblValor1.setText(String.valueOf(pessoa1.getValorConta()));
+                lblValor2.setText(String.valueOf(pessoa2.getValorConta()));
+                txtTransferencia1.setText("0");
+            }else{
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Informe um valor válido!!!", 'e');
             }
-            lblValor1.setText(String.valueOf(pessoa1.getValorConta()));
-            lblValor2.setText(String.valueOf(pessoa2.getValorConta()));
-            txtTransferencia1.setText("0");
         
         }catch(Exception ex){
             System.out.println("Erro: " + ex.getMessage());
@@ -168,8 +190,28 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTransfere1ActionPerformed
 
     private void btnTransfere2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransfere2ActionPerformed
-        // TODO add your handling code here:
+        try{
+            double transf = Double.parseDouble(txtTransferencia2.getText());
+            if(pessoa2.credito(transf) == true){
+                pessoa1.debito(transf);
+            }
+            lblValor1.setText(String.valueOf(pessoa1.getValorConta()));
+            lblValor2.setText(String.valueOf(pessoa2.getValorConta()));
+            txtTransferencia2.setText("0");
+        
+        }catch(Exception ex){
+            System.out.println("Erro: " + ex.getMessage());
+        }
     }//GEN-LAST:event_btnTransfere2ActionPerformed
+
+    private void btnTransfere3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransfere3ActionPerformed
+        boolean resposta = CaixaDeDialogo.obterinstancia().pedirConfirmacao("Titulo", "Tem certeza?", 'p');
+        if(resposta){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("RESPONDEU SIM");
+        }else{
+            CaixaDeDialogo.obterinstancia().exibirMensagem("RESPONDEU NÃO");
+        }
+    }//GEN-LAST:event_btnTransfere3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,6 +251,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTransfere1;
     private javax.swing.JButton btnTransfere2;
+    private javax.swing.JButton btnTransfere3;
     private javax.swing.JLabel lblChequeEspecial1;
     private javax.swing.JLabel lblChequeEspecial2;
     private javax.swing.JLabel lblNome1;
