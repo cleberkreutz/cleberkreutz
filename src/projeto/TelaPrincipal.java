@@ -5,6 +5,9 @@
  */
 package projeto;
 
+import funcoes.Funcoes;
+import funcoes.CaixaDeDialogo;
+
 /**
  *
  * @author jonasdhein

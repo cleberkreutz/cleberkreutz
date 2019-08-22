@@ -1,4 +1,4 @@
-package projeto;
+package funcoes;
 
 import javax.swing.JOptionPane;
 /**

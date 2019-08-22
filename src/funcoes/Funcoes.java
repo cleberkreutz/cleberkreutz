@@ -1,4 +1,4 @@
-package projeto;
+package funcoes;
 
 import java.util.Random;
 import javax.swing.JOptionPane;
