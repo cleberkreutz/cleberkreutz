@@ -5,6 +5,8 @@
  */
 package jogo;
 
+import funcoes.*;
+
 /**
  *
  * @author jonasdhein
@@ -13,6 +15,8 @@ public class TelaCombate extends javax.swing.JFrame {
 
     Personagem personagem;
     Inimigo inimigo;
+    String[] inimigos = {"Godzilla", "Inimigo 2", "Inimigo Final"};
+    int contInimigo = 0;
     
     public TelaCombate() {
         initComponents();
@@ -43,9 +47,15 @@ public class TelaCombate extends javax.swing.JFrame {
     private void gerarInimigo(){
         
         inimigo = new Inimigo();
-        inimigo.setNome("Godzilla");
-        inimigo.setVida(1000);
-        inimigo.setAtaque(200);
+        inimigo.setNome(inimigos[contInimigo]);
+        inimigo.setVida(200);
+        inimigo.setAtaque(30);
+        
+        if(contInimigo < inimigos.length){
+            contInimigo += 1;
+        }else{
+            contInimigo = 0;
+        }
         
     }
 
@@ -63,7 +73,7 @@ public class TelaCombate extends javax.swing.JFrame {
         lblVidaPersonagem = new javax.swing.JLabel();
         lblAtaquePersonagem = new javax.swing.JLabel();
         lblPersonagem2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnAtacar = new javax.swing.JButton();
         lblNomeInimigo = new javax.swing.JLabel();
         lblPersonagem3 = new javax.swing.JLabel();
         lblVidaInimigo = new javax.swing.JLabel();
@@ -82,10 +92,10 @@ public class TelaCombate extends javax.swing.JFrame {
 
         lblPersonagem2.setText("Ataque:");
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAtacar.setText("ATACAR");
+        btnAtacar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAtacarActionPerformed(evt);
             }
         });
 
@@ -105,7 +115,7 @@ public class TelaCombate extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(140, 140, 140)
-                .addComponent(jButton1)
+                .addComponent(btnAtacar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -158,18 +168,49 @@ public class TelaCombate extends javax.swing.JFrame {
                             .addComponent(lblPersonagem4)
                             .addComponent(lblAtaqueInimigo))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnAtacar)
                 .addGap(23, 23, 23))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        inimigo.setVida(inimigo.getVida() - personagem.getAtaque());
+    private void btnAtacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtacarActionPerformed
+        
+        atacar();
+        
+        if(inimigo.getVida() <= 0){ //VERIFICA SE PRECISA GERAR OUTRO INIMIGO
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Inimigo derrotado, PARABÉNS!!!", 'i');
+            gerarInimigo();
+        }
+        
+        exibirPersonagem();
         exibirInimigo();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAtacarActionPerformed
 
+    private void atacar(){
+        int ataque = personagem.getAtaque();
+        int vida = inimigo.getVida();
+        /*
+        1,2 = inimigo ataca
+        3 = ataque normal
+        4 = ataque + 10%
+        5 = ataque * 2
+        */
+        int dado = Funcoes.sortearNumero(5);
+        if(dado == 1 || dado == 2){
+            personagem.setVida(personagem.getVida() - inimigo.getAtaque());
+        }else if(dado == 3){
+            inimigo.setVida(inimigo.getVida() - ataque);
+        }else if(dado == 4){ //10% a mais
+            vida = (int) (inimigo.getVida() - (ataque * 1.1));
+            inimigo.setVida(vida);
+        }else{ //ataque x 2
+            inimigo.setVida(inimigo.getVida() - (ataque * 2));
+            personagem.setAtaque((int) (ataque * 1.2));
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -206,7 +247,7 @@ public class TelaCombate extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnAtacar;
     private javax.swing.JLabel lblAtaqueInimigo;
     private javax.swing.JLabel lblAtaquePersonagem;
     private javax.swing.JLabel lblNomeInimigo;

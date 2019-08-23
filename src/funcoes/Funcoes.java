@@ -69,6 +69,12 @@ public class Funcoes {
         return resultado;
     }
     
+    public static int sortearNumero(int maximo){
+        
+        Random aleatorio = new Random();
+        return aleatorio.nextInt(maximo) + 1;
+    }
+    
     public static String sortearNumeros(int quantidade, int maximo){
         String resultado = "";
         int numero = 0;
