@@ -15,14 +15,14 @@ public class TelaCombate extends javax.swing.JFrame {
 
     Personagem personagem;
     Inimigo inimigo;
-    String[] inimigos = {"Godzilla", "Inimigo 2", "Inimigo Final"};
+    String[] inimigos = {"Cell", "Bardock", "Inimigo Final"};
     int contInimigo = 0;
     
     public TelaCombate() {
         initComponents();
         
         personagem = new Personagem();
-        personagem.setNome("BudoTrader");
+        personagem.setNome("Goku");
         personagem.setVida(100);
         personagem.setAtaque(15);
         
@@ -48,8 +48,8 @@ public class TelaCombate extends javax.swing.JFrame {
         
         inimigo = new Inimigo();
         inimigo.setNome(inimigos[contInimigo]);
-        inimigo.setVida(200);
-        inimigo.setAtaque(30);
+        inimigo.setVida(100);
+        inimigo.setAtaque(15);
         
         if(contInimigo < inimigos.length){
             contInimigo += 1;
@@ -183,6 +183,11 @@ public class TelaCombate extends javax.swing.JFrame {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Inimigo derrotado, PARABÉNS!!!", 'i');
             gerarInimigo();
         }
+        
+         if(personagem.getVida() <= 0){ //VERIFICA SE PRECISA GERAR OUTRO INIMIGO
+            CaixaDeDialogo.obterinstancia().exibirMensagem("GAME OVER!!!", 'i');
+         }
+        
         
         exibirPersonagem();
         exibirInimigo();
