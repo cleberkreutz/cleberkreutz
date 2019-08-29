@@ -9,7 +9,7 @@ import funcoes.*;
 
 /**
  *
- * @author jonasdhein
+ * @author cleberkreutz
  */
 public class TelaCombate extends javax.swing.JFrame {
 
@@ -79,6 +79,7 @@ public class TelaCombate extends javax.swing.JFrame {
         lblVidaInimigo = new javax.swing.JLabel();
         lblAtaqueInimigo = new javax.swing.JLabel();
         lblPersonagem4 = new javax.swing.JLabel();
+        lblDano = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,14 +110,12 @@ public class TelaCombate extends javax.swing.JFrame {
 
         lblPersonagem4.setText("Ataque:");
 
+        lblDano.setText("Dano");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(140, 140, 140)
-                .addComponent(btnAtacar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,6 +140,15 @@ public class TelaCombate extends javax.swing.JFrame {
                             .addComponent(lblVidaInimigo)
                             .addComponent(lblAtaqueInimigo))))
                 .addGap(44, 44, 44))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(btnAtacar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(lblDano, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,9 +175,11 @@ public class TelaCombate extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPersonagem4)
                             .addComponent(lblAtaqueInimigo))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
                 .addComponent(btnAtacar)
-                .addGap(23, 23, 23))
+                .addGap(18, 18, 18)
+                .addComponent(lblDano, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -202,15 +212,31 @@ public class TelaCombate extends javax.swing.JFrame {
         4 = ataque + 10%
         5 = ataque * 2
         */
-        int dado = Funcoes.sortearNumero(5);
+        int dado = Funcoes.sortearNumero(8);
         if(dado == 1 || dado == 2){
+            lblDano.setText("Dano: " + inimigo.getAtaque());
             personagem.setVida(personagem.getVida() - inimigo.getAtaque());
-        }else if(dado == 3){
+        }else if(dado == 3){   
+            lblDano.setText("Dano: " + personagem.getAtaque());
             inimigo.setVida(inimigo.getVida() - ataque);
         }else if(dado == 4){ //10% a mais
+            lblDano.setText("Dano: " + personagem.getAtaque());
             vida = (int) (inimigo.getVida() - (ataque * 1.1));
             inimigo.setVida(vida);
+        }else if(dado == 5){ //30% a mais
+            lblDano.setText("Dano: " + personagem.getAtaque());
+            vida = (int) (inimigo.getVida() - (ataque * 1.3));
+            inimigo.setVida(vida);
+        }else if(dado == 6){ 
+            lblDano.setText("Dano: " + personagem.getAtaque());
+            vida = (int) (inimigo.getVida() - (ataque * 1));
+            inimigo.setVida(vida);    
+        }else if(dado == 7){ //20% a mais
+            lblDano.setText("Dano: " + personagem.getAtaque());
+            vida = (int) (inimigo.getVida() - (ataque * 1.2));
+            inimigo.setVida(vida);              
         }else{ //ataque x 2
+            lblDano.setText("Dano: " + personagem.getAtaque());
             inimigo.setVida(inimigo.getVida() - (ataque * 2));
             personagem.setAtaque((int) (ataque * 1.2));
         }
@@ -255,6 +281,7 @@ public class TelaCombate extends javax.swing.JFrame {
     private javax.swing.JButton btnAtacar;
     private javax.swing.JLabel lblAtaqueInimigo;
     private javax.swing.JLabel lblAtaquePersonagem;
+    private javax.swing.JLabel lblDano;
     private javax.swing.JLabel lblNomeInimigo;
     private javax.swing.JLabel lblNomePersonagem;
     private javax.swing.JLabel lblPersonagem1;
