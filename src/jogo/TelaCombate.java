@@ -24,7 +24,7 @@ public class TelaCombate extends javax.swing.JFrame {
         personagem = new Personagem();
         personagem.setNome("Goku");
         personagem.setVida(100);
-        personagem.setAtaque(15);
+        personagem.setAtaque(25);
         
         gerarInimigo();
         
@@ -48,7 +48,7 @@ public class TelaCombate extends javax.swing.JFrame {
         
         inimigo = new Inimigo();
         inimigo.setNome(inimigos[contInimigo]);
-        inimigo.setVida(100);
+        inimigo.setVida(200);
         inimigo.setAtaque(15);
         
         if(contInimigo < inimigos.length){
@@ -93,6 +93,7 @@ public class TelaCombate extends javax.swing.JFrame {
 
         lblPersonagem2.setText("Ataque:");
 
+        btnAtacar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnAtacar.setText("ATACAR");
         btnAtacar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,6 +111,7 @@ public class TelaCombate extends javax.swing.JFrame {
 
         lblPersonagem4.setText("Ataque:");
 
+        lblDano.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblDano.setText("Dano");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -179,7 +181,7 @@ public class TelaCombate extends javax.swing.JFrame {
                 .addComponent(btnAtacar)
                 .addGap(18, 18, 18)
                 .addComponent(lblDano, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -206,12 +208,7 @@ public class TelaCombate extends javax.swing.JFrame {
     private void atacar(){
         int ataque = personagem.getAtaque();
         int vida = inimigo.getVida();
-        /*
-        1,2 = inimigo ataca
-        3 = ataque normal
-        4 = ataque + 10%
-        5 = ataque * 2
-        */
+       
         int dado = Funcoes.sortearNumero(8);
         if(dado == 1 || dado == 2){
             lblDano.setText("Dano: " + inimigo.getAtaque());
